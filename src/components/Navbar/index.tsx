@@ -14,7 +14,7 @@ const iconeProps = {
 export const Navbar = () => {
     return (
         <nav className={styles.nav}>
-            <img src='logo.svg' className={styles.logo}/>
+            <img src='assets/logo.svg' className={styles.logo} alt='Logo da TratoTech'/>
             <div className={styles.links}>
                 <div>
                     <a href="/" className={classNames(styles.link, {
