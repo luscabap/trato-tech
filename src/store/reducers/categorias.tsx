@@ -11,7 +11,7 @@ import jogosHeader from '@/assets/categorias/header/jogos.png';
 import somHeader from '@/assets/categorias/header/som.png';
 import { ICategoria } from "../../interfaces/ICategoria";
 
-const estadoInicial: ICategoria[] = [
+const initialState: ICategoria[] = [
     {
         nome: 'Eletrônicos',
         thumbnail: eletronicosThumb,
@@ -46,7 +46,7 @@ const estadoInicial: ICategoria[] = [
 
 const categoriasSlice = createSlice({
     name: 'categorias',
-    initialState: estadoInicial,
+    initialState,
     reducers: {
 
     }
