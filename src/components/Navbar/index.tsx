@@ -5,6 +5,8 @@ import {
     RiShoppingCart2Fill,
     RiShoppingCart2Line
 } from 'react-icons/ri'
+import { useNavigate } from 'react-router-dom';
+import logo from '@/assets/logo.svg'
 
 const iconeProps = {
     color: 'white',
@@ -12,14 +14,18 @@ const iconeProps = {
 }
 
 export const Navbar = () => {
+    const navigate = useNavigate()
+
     return (
         <nav className={styles.nav}>
-            <img src='assets/logo.svg' className={styles.logo} alt='Logo da TratoTech'/>
+            <img src={logo} className={styles.logo} alt='Logo da TratoTech'/>
             <div className={styles.links}>
                 <div>
-                    <a href="/" className={classNames(styles.link, {
+                    <a className={classNames(styles.link, {
                         [styles.selected]: window.location.pathname === '/'
-                    })}>
+                        })}
+                        onClick={() => navigate('/')}
+                    >
                         Página Inicial
                     </a>
                 </div>

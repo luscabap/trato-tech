@@ -5,6 +5,7 @@ import { ICategoria } from "../../interfaces/ICategoria";
 import { IItem } from "../../interfaces/IItem";
 import styles from './Categoria.module.scss'
 import { Item } from "../../components/Item";
+import { RootState } from "@reduxjs/toolkit/query";
 
 interface SelectorPaginaCategoria {
     categoria: ICategoria,
@@ -13,9 +14,9 @@ interface SelectorPaginaCategoria {
 
 export const PaginaCategoria = () => {
     const { nomeCategoria } = useParams();
-    const { categoria, itens }: SelectorPaginaCategoria = useSelector(state => ({
-        categoria: state.categorias.find(categoria => categoria.id === nomeCategoria),
-        itens: state.itens.filter(item => item.categoria === nomeCategoria)
+    const { categoria, itens }: SelectorPaginaCategoria = useSelector((state: RootState) => ({
+        categoria: state.categorias.find((categoria: ICategoria) => categoria.id === nomeCategoria),
+        itens: state.itens.filter((item: IItem) => item.categoria === nomeCategoria)
     }))
 
     return (
