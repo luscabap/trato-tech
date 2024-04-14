@@ -2,9 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IItem } from '../../interfaces/IItem';
 import { mudarFavorito } from '../../store/reducers/itens';
 import styles from './Item.module.scss';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiFillHeart, AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 import { FaCartPlus } from 'react-icons/fa'
-import { mudarCarrinho } from '../../store/reducers/carrinho';
+import { mudarCarrinho, mudarQuantidade } from '../../store/reducers/carrinho';
 import classNames from 'classnames';
 
 const iconeProps = {
@@ -12,7 +12,12 @@ const iconeProps = {
     color: "#041833"
 }
 
-export const Item = ({ foto, titulo, descricao, preco, favorito, id, carrinho }: IItem) => {
+const quantidadeProps = {
+    size: 32,
+    color: '#1875E8'
+}
+
+export const Item = ({ foto, titulo, descricao, preco, favorito, id, carrinho, quantidade }: IItem) => {
     const dispatch = useDispatch();
     const estaNoCarrinho = useSelector(state => state.carrinho.some(itemNoCarrinho => itemNoCarrinho.id === id));
 
@@ -46,12 +51,34 @@ export const Item = ({ foto, titulo, descricao, preco, favorito, id, carrinho }:
                             ? <AiFillHeart {...iconeProps} color="#FF0000" className={styles.item__acao} onClick={resolverFavorito}/> 
                             : <AiOutlineHeart  {...iconeProps} className={styles.item__acao} onClick={resolverFavorito}/>
                         }
-                        <FaCartPlus 
-                            {...iconeProps}
-                            color={ estaNoCarrinho ? '#1875E8' : iconeProps.color}
-                            className={styles.item__acao}
-                            onClick={resolverCarrinho}
-                        />
+
+                        {
+                            estaNoCarrinho
+                            ? (
+                                <div className={styles.quantidade}>
+                                    Quantidade:
+                                    <AiFillMinusCircle 
+                                        {...quantidadeProps} 
+                                        onClick={() => {
+                                            if (quantidade >= 1){
+                                                dispatch(mudarQuantidade({ id, quantidade: -1 }))
+                                            }
+                                        }}
+                                    />
+                                    <span>{String(quantidade || 0).padStart(2, '0')}</span>
+                                    <AiFillPlusCircle 
+                                        {...quantidadeProps}
+                                        onClick={() => dispatch(mudarQuantidade({ id, quantidade: +1 }))}
+                                    />
+                                </div>
+                            )
+                            : (<FaCartPlus 
+                                    {...iconeProps}
+                                    color={ estaNoCarrinho ? '#1875E8' : iconeProps.color}
+                                    className={styles.item__acao}
+                                    onClick={resolverCarrinho}
+                                />)
+                        }
                     </div>
                 </div>
             </div>
