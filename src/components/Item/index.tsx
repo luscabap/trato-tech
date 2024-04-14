@@ -5,13 +5,14 @@ import styles from './Item.module.scss';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { FaCartPlus } from 'react-icons/fa'
 import { mudarCarrinho } from '../../store/reducers/carrinho';
+import classNames from 'classnames';
 
 const iconeProps = {
     size: 24,
     color: "#041833"
 }
 
-export const Item = ({ foto, titulo, descricao, preco, favorito, id }: IItem) => {
+export const Item = ({ foto, titulo, descricao, preco, favorito, id, carrinho }: IItem) => {
     const dispatch = useDispatch();
     const estaNoCarrinho = useSelector(state => state.carrinho.some(itemNoCarrinho => itemNoCarrinho.id === id));
 
@@ -24,7 +25,9 @@ export const Item = ({ foto, titulo, descricao, preco, favorito, id }: IItem) =>
     }
 
     return (
-        <div className={styles.item}>
+        <div className={classNames(styles.item, {
+            [styles.itemNoCarrinho]: carrinho
+        })}>
             <div className={styles.item__imagem}>
                 <img src={foto} alt={titulo} />
             </div>

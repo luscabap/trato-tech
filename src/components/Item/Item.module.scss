@@ -6,6 +6,7 @@
     flex-direction: column;
     overflow: hidden;
     width: 335px;
+
     &__descricao {
       background-color: #EFF9FF;
       display: flex;
@@ -13,6 +14,7 @@
       justify-content: space-between;
       flex: 1;
     }
+    
     &__titulo {
       padding: 16px 16px 0 16px;
       h2 {

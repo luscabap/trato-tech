@@ -5,5 +5,6 @@ export interface IItem {
     favorito: boolean,
     preco: number,
     id: string,
-    categoria: string
+    categoria: string,
+    carrinho?: boolean
 }
