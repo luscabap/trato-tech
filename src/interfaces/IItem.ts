@@ -7,5 +7,5 @@ export interface IItem {
     id: string,
     categoria: string,
     carrinho?: boolean,
-    quantidade: number
+    quantidade?: number
 }

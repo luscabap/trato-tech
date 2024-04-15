@@ -14,10 +14,14 @@ interface SelectorPaginaCategoria {
 
 export const PaginaCategoria = () => {
     const { nomeCategoria } = useParams();
-    const { categoria, itens }: SelectorPaginaCategoria = useSelector((state: RootState) => ({
-        categoria: state.categorias.find((categoria: ICategoria) => categoria.id === nomeCategoria),
-        itens: state.itens.filter((item: IItem) => item.categoria === nomeCategoria)
-    }))
+    const { categoria, itens }: SelectorPaginaCategoria = useSelector((state: RootState) => {
+        const regexp = new RegExp(state.busca, 'i')
+
+        return {
+            categoria: state.categorias.find((categoria: ICategoria) => categoria.id === nomeCategoria),
+            itens: state.itens.filter((item: IItem) => item.categoria === nomeCategoria && item.titulo.match(regexp))
+        }
+    })
 
     return (
         <div>
