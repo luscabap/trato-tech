@@ -56,7 +56,7 @@ export const Item = ({ foto, titulo, descricao, preco, favorito, id, carrinho, q
                             estaNoCarrinho
                             ? (
                                 <div className={styles.quantidade}>
-                                    Quantidade:
+                                    Quantidade:<br></br>
                                     <AiFillMinusCircle 
                                         {...quantidadeProps} 
                                         onClick={() => {
